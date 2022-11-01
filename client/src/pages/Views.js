@@ -10,6 +10,8 @@ import Profile from './Profile';
 import Tests from './Tests';
 import TestsNormal from './TestsNormal';
 import TestsNormal2 from './TestsNormal2';
+import CompletedTests from "./CompletedTests";
+
 import {
     BrowserRouter as Router,
     Routes,
@@ -30,6 +32,7 @@ import ChangePassword from './ChangePassword';
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/change" element={<ChangePassword />} />
+                  <Route path="/completed" element={<CompletedTests />} />
                   <Route path="/tests" element={<Tests />} />
                   <Route path="/tests1" element={<TestsNormal />} />
                   <Route path="/tests2" element={<TestsNormal2 />} />
