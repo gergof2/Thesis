@@ -17,6 +17,7 @@ import {
     Routes,
     Route
   } from 'react-router-dom';
+import CardGame from './CardGame';
 import ChangePassword from './ChangePassword';
 
   const Views = () => {
@@ -36,6 +37,7 @@ import ChangePassword from './ChangePassword';
                   <Route path="/tests" element={<Tests />} />
                   <Route path="/tests1" element={<TestsNormal />} />
                   <Route path="/tests2" element={<TestsNormal2 />} />
+                  <Route path="/cards" element={<CardGame />} />
               </Route>
               <Route path="*" element={user.loggedIn === true ?  (<Dashboard />) :(<Home />)}/>
           </Routes>
