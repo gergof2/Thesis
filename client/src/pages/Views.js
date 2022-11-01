@@ -12,6 +12,8 @@ import {
     Routes,
     Route
   } from 'react-router-dom';
+import ChangePassword from './ChangePassword';
+
   const Views = () => {
 
     const {user} = useContext(AccountContext)
@@ -24,6 +26,7 @@ import {
               <Route element={<PrivateRoutes/>}>
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/profile" element={<Profile />} />
+                  <Route path="/change" element={<ChangePassword />} />
               </Route>
               <Route path="*" element={user.loggedIn === true ?  (<Dashboard />) :(<Home />)}/>
           </Routes>
