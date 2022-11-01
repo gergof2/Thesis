@@ -6,6 +6,7 @@ import Home from './Home';
 import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
+import Profile from './Profile';
 import {
     BrowserRouter as Router,
     Routes,
@@ -22,6 +23,7 @@ import {
               <Route path="/login" element={user.loggedIn === true ? (<Dashboard />) :(<Login />) }/>               
               <Route element={<PrivateRoutes/>}>
                   <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/profile" element={<Profile />} />
               </Route>
               <Route path="*" element={user.loggedIn === true ?  (<Dashboard />) :(<Home />)}/>
           </Routes>
