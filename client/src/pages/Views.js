@@ -4,6 +4,7 @@ import React,{ useContext } from 'react';
 
 import Home from './Home';
 import Login from './Login';
+import Signup from './Signup';
 import Dashboard from './Dashboard';
 import {
     BrowserRouter as Router,
@@ -17,6 +18,7 @@ import {
         <Router>
           <Routes>
               <Route path="/" element={user.loggedIn === true ? (<Dashboard />) :(<Home />)}/>
+              <Route path="/signup" element={user.loggedIn === true ? (<Dashboard />) :(<Signup />)}/>
               <Route path="/login" element={user.loggedIn === true ? (<Dashboard />) :(<Login />) }/>               
               <Route element={<PrivateRoutes/>}>
                   <Route path="/dashboard" element={<Dashboard />} />
