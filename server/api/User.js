@@ -194,3 +194,22 @@ router.get('/scoreboard', async (req, res) => {
     });
 });
 
+router.post('/gettests', async (req, res) => {
+    if(req.session.user && req.session.user.email){ 
+        let data = [];
+        let record = [req.session.user.id];
+        function get_tests(callback){
+            sql.query("SELECT * FROM tests WHERE user_id = ? ORDER BY date DESC", [record], function(err, results){
+                if(err) return err;
+                data = results;
+                return callback(results);
+            })
+        }
+        get_tests(async function(result){
+            data = result;
+            return res.json(data);
+        })
+    }
+    else return res.json({message: "Ismeretlen felhasználó!"});
+})
+
