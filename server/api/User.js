@@ -9,6 +9,16 @@ const { json } = require('express');
 const saltRounds = 10;
 
 router
+    .route("/login")
+    .get(async (req, res) => {
+        if (req.session.user && req.session.user.email){
+            res.json({ loggedIn: true, email: req.session.user.email });
+        }else{
+            res.json({loggedIn: false});
+        }
+    }
+
+    )
     .post(async (req, res) => {
     if(req.body.email == "", req.body.password == "") {
         res.json({
