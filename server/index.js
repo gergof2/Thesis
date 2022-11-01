@@ -4,6 +4,10 @@ const cors = require('cors');
 const session = require('express-session');
 const {Server} = require('socket.io');
 const helmet = require('helmet');
+
+const UserRouterUser = require('./api/User');
+const UserRouterWords = require('./api/Words');
+
 const app = express();
 
 const server = require('http').createServer(app);
@@ -37,6 +41,10 @@ app.use(session({
     },   
 })
 );
+
+app.use('/user', UserRouterUser);
+app.use('/words', UserRouterWords);
+
 app.listen(5000, () => {
     console.log("Server is up and running on 5000 ...");
 }) 
