@@ -94,5 +94,40 @@ router.post('/signup', async (req, res) => {
             message: "A jelszó túl rövid!"
         })
     }else {
+        
+        var id = '';
+        var record = req.body.email;
+        function get_User(callback){
+            sql.query("SELECT id FROM users WHERE email = ?", [record], function(err, results){
+                if(err) throw err;
+                id = results[0];
+                return callback(results[0]);
+            })
+        }
+
+        get_User(async function(result){
+            id = result;
+            
+            if(id === undefined){
+                const hashedPass = await bcrypt.hash(req.body.password, 10);
+                var records = [req.body.name, req.body.email, hashedPass, req.body.dateOfBirth];
+                const newUserQuery = await sql.query(`INSERT INTO users(name, email, password, dateOfBirth) values (?)`, [records]
+                );
+                    return res.json({
+                        status: "SUCCESS",
+                        message: "Sikeres regisztráció!"
+                    });     
+            }else{
+                
+                return res.json({
+                    status: "FAILED",
+                    message: "A megadott e-mail cím foglalt!"
+                })
+                
+            }
+        })
+    }
+});
+
     }
 });
