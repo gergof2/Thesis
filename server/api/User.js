@@ -178,3 +178,19 @@ router.post('/score', async (req, res) => {
     else return res.json({message: "Ismeretlen felhasználó!"});
 });
 
+router.get('/scoreboard', async (req, res) => {
+    let data = [];
+    function get_ScoreBoard(callback){
+        sql.query("SELECT name, score, createDate FROM users ORDER BY score DESC LIMIT 7", function(err, results){
+            if(err) return err;
+            data = results
+            return callback(results);
+        })
+    }
+
+    get_ScoreBoard(async function(result){
+        data = result;
+        return res.json({data: data});
+    });
+});
+
