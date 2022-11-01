@@ -8,6 +8,8 @@ import Signup from './Signup';
 import Dashboard from './Dashboard';
 import Profile from './Profile';
 import Tests from './Tests';
+import TestsNormal from './TestsNormal';
+import TestsNormal2 from './TestsNormal2';
 import {
     BrowserRouter as Router,
     Routes,
@@ -29,6 +31,8 @@ import ChangePassword from './ChangePassword';
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/change" element={<ChangePassword />} />
                   <Route path="/tests" element={<Tests />} />
+                  <Route path="/tests1" element={<TestsNormal />} />
+                  <Route path="/tests2" element={<TestsNormal2 />} />
               </Route>
               <Route path="*" element={user.loggedIn === true ?  (<Dashboard />) :(<Home />)}/>
           </Routes>
