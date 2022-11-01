@@ -129,5 +129,14 @@ router.post('/signup', async (req, res) => {
     }
 });
 
+router.post('/logout', async (req, res) =>{
+    if (req.session.user && req.session.user.email){
+        req.session.user = {
+            email: null,
+            id: null,
+        };
+        return res.json({loggedIn: false, email: null});
     }
+    else return res.json({message: "Ismeretlen felhasználó!"});
 });
+
