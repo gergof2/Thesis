@@ -159,3 +159,22 @@ router.post('/profile',async (req, res) => {
     else return res.json({message: "Ismeretlen felhasználó!"});
 });
 
+router.post('/score', async (req, res) => {
+    if(req.session.user && req.session.user.email){       
+        let data = []; 
+        function post_Score(callback){
+            sql.query("UPDATE users SET score = score + ? WHERE email = ?", [req.body.score, req.session.user.email], function(err, results){
+                if(err) throw err;
+                data = results[0]
+                return callback(results[0]);
+            })
+        }
+        
+        post_Score(async function(result){
+            data = result;
+            return res.json({message: data})
+        });
+    }
+    else return res.json({message: "Ismeretlen felhasználó!"});
+});
+
