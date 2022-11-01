@@ -72,4 +72,27 @@ router
 });
 
 router.post('/signup', async (req, res) => {
+
+    if(req.body.name == "" || req.body.email == "" || req.body.password == "" || req.body.dateOfBirth == "") {
+        res.json({
+            status: "FAILED",
+            message: "Üres mezőt adtál meg!"
+        });
+    } else if (!/^[0-9a-zA-Z ]*$/.test(req.body.name)){
+        res.json({
+            status: "FAILED",
+            message: "Érvénytelen felhasználónév!"
+        })
+    } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(req.body.email)){
+        res.json({
+            status: "FAILED",
+            message: "Érvénytelen e-mail cím!"
+        })
+    } else if (req.body.password.length < 6){
+        res.json({
+            status: "FAILED",
+            message: "A jelszó túl rövid!"
+        })
+    }else {
+    }
 });
