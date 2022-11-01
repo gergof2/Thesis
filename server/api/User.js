@@ -213,3 +213,39 @@ router.post('/gettests', async (req, res) => {
     else return res.json({message: "Ismeretlen felhasználó!"});
 })
 
+router.post('/newpass', async (req,res) => {
+    if(req.session.user && req.session.user.email){
+        var data = [];
+        var record = [req.session.user.id];
+        function get_User(callback){
+            sql.query("SELECT password FROM users WHERE id = ?", [record], function(err, results){
+                if(err) throw err;
+                data = results;
+                return callback(results);
+            })
+        }
+        get_User(async function(result){
+            data = result[0];
+            const isSamePass = await bcrypt.compare(
+                req.body.password,
+                data.password
+            );
+            if (isSamePass) {
+                const hashedPass = await bcrypt.hash(req.body.newPassword, 10);
+                const newUserQuery = await sql.query("UPDATE users SET password = ? WHERE id = ?", [hashedPass, req.session.user.id])
+
+                return res.json({
+                    status: "SUCCESS",
+                    message: "Sikeres jelszócsere!"
+                });  
+            }else return res.json({
+                status: "FAILED",
+                message: "A megadott régi jelszó hibás!"
+            });                            
+        });
+
+    }
+    else return res.json({message: "Ismeretlen felhasználó!"});
+})
+
+module.exports = router;
