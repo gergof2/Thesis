@@ -14,6 +14,11 @@ function Cards(){
     const hun = [];
     const [huns, setHuns] = useState([]);
     const [engs, setEngs] = useState([]);
+    const [points, setPoints] = useState(0);
+    const [done, setDone] = useState(false);
+    const [prev, setPrev] = useState(-1);
+    const [minus, setMinus] = useState(0);
+
     useEffect(() => {
         fetch("http://localhost:5000/words/getwords", {
             method: "POST",
@@ -68,10 +73,6 @@ function Cards(){
             setHuns(hun);
         });
     }
-    const [point, setPoint] = useState(0);
-    const [done, setDone] = useState(false);
-    const [prev, setPrev] = useState(-1);
-    const [minus, setMinus] = useState(0);
 
     function check(current){
         if(items[current].stat != "active"){
@@ -83,7 +84,7 @@ function Cards(){
             }else{
                 items[current].stat = "wrong";
                 items[prev].stat = "wrong";
-                setMinus(minus+0.5)
+                setMinus(minus+1)
                 setItems([...items])
                 setTimeout(() => {
                     items[current].stat = "";
@@ -129,9 +130,6 @@ function Cards(){
                 },
                 body: JSON.stringify(vals),
             }).catch(err => {return;})
-            .then(async res => {
-
-            })
     }
 
     useEffect(() => {
@@ -140,12 +138,12 @@ function Cards(){
             if(element.stat === "correct")
             count++;           
         });
-        setPoint(count);
-        if(count == 20){
-            postTest(engs, huns, count - minus, mode); 
-            if(count - minus >= 0){                
+        if(count === 20){
+            postTest(engs, huns, (count - minus < 0 ? 0 : count-minus), mode); 
+            if(count - minus > 0){                
                 addScore(count-minus);                             
             }    
+            setPoints(count-minus);
             setDone(true);           
         }
     }, [prev])
@@ -187,7 +185,7 @@ function Cards(){
                 </ButtonGroup>
             ) : (
             <div>
-                <StyledLabel>Elért pontszámod: {point-minus < 0 ? 0 : Math.round(point-minus)}</StyledLabel><br/>
+                <StyledLabel>Elért pontszámod: {points}</StyledLabel><br/>
                 <ButtonGroup>
                     <StyledButton to="/tests">Vissza</StyledButton>
                     <StyledButton onClick={refreshPage}>Újra</StyledButton>
