@@ -96,10 +96,10 @@ const TestsNormal = () => {
                             <SliderCard key={index}>
                                 <SliderCardTop>
                                     <SliderCartTopTitle>{item.title}</SliderCartTopTitle>
-                                    <div className="slideCard-bottom">
+                                    <SliderCardBottom>
                                         <SliderCartTopText>{item.text}</SliderCartTopText>
-                                    </div>
-                                    <ButtonGroup><StyledSliderButton to={item.link}>Indítás</StyledSliderButton></ButtonGroup>
+                                    </SliderCardBottom>
+                                    <ButtonGroup><StyledSliderButton to={(item.link)}>Indítás</StyledSliderButton></ButtonGroup>
                                 </SliderCardTop>
                             </SliderCard>
                         ))}

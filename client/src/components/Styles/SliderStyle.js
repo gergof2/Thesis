@@ -20,7 +20,7 @@ export const SliderCard = styled.div`
 `;
 
 export const SliderCartTopTitle = styled.h1`
-    font-size: 23px;
+    font-size: 20px;
 `;
 
 export const SliderCartTopText = styled.p`
@@ -32,6 +32,11 @@ export const SliderCardTop = styled.div`
     width: 200px;
     height: 100px;
     object fit: cover;
+`;
+
+export const SliderCardBottom = styled.div`
+    display: center
+    font-size: 15px
 `;
 
 export const StyledSliderButton = styled(Link)`
