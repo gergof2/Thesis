@@ -6,7 +6,7 @@ import {
 } from './Styles/Styles';
 import {
     StyledButton, 
-} from './../components/Styles/ButtonStyle';
+} from './Styles/ButtonStyle';
 
 function Cards(){
     const [items, setItems] = useState([]);
@@ -30,29 +30,34 @@ function Cards(){
 
     async function getResJson(res){
         return res.json().then(async json => {  
-            setItems([
+            items.push(                
                 { id: 1, value: json[0].english, stat: ""},
-                { id: 1, value: json[0].hungarian, stat: ""},
                 { id: 2, value: json[1].english, stat: ""},
-                { id: 2, value: json[1].hungarian, stat: ""},
                 { id: 3, value: json[2].english, stat: ""},
-                { id: 3, value: json[2].hungarian, stat: ""},
                 { id: 4, value: json[3].english, stat: ""},
-                { id: 4, value: json[3].hungarian, stat: ""},
                 { id: 5, value: json[4].english, stat: ""},
-                { id: 5, value: json[4].hungarian, stat: ""},
                 { id: 6, value: json[5].english, stat: ""},
-                { id: 6, value: json[5].hungarian, stat: ""},
                 { id: 7, value: json[6].english, stat: ""},
-                { id: 7, value: json[6].hungarian, stat: ""},
                 { id: 8, value: json[7].english, stat: ""},
-                { id: 8, value: json[7].hungarian, stat: ""},
                 { id: 9, value: json[8].english, stat: ""},
-                { id: 9, value: json[8].hungarian, stat: ""},
-                { id: 10, value: json[9].english, stat: ""},
-                { id: 10, value: json[9].hungarian, stat: ""}
-            ].sort(() => Math.random() - 0.5));
-                             
+                { id: 10, value: json[9].english, stat: ""}
+            );
+
+            items.sort(() => Math.random() - 0.5);
+
+            items.push(
+                { id: 1, value: json[0].hungarian, stat: ""},                
+                { id: 2, value: json[1].hungarian, stat: ""},                
+                { id: 3, value: json[2].hungarian, stat: ""},                
+                { id: 4, value: json[3].hungarian, stat: ""},                
+                { id: 5, value: json[4].hungarian, stat: ""},               
+                { id: 6, value: json[5].hungarian, stat: ""},                
+                { id: 7, value: json[6].hungarian, stat: ""},                
+                { id: 8, value: json[7].hungarian, stat: ""},                
+                { id: 9, value: json[8].hungarian, stat: ""},               
+                { id: 10, value: json[9].hungarian, stat: ""} 
+            );    
+                           
             await json.forEach((word) => {
                 eng.push(word.english);
             })
