@@ -8,8 +8,6 @@ const { json } = require('express');
 
 router.post('/getwords', async (req, res) => {
     if(req.session.user && req.session.user.email){
-        let english = [];
-        let hungarian = [];
         let results = [];
         function get_Words(callback){
             sql.query("SELECT english, hungarian FROM words ORDER BY RAND() LIMIT 10",function(err, results){
