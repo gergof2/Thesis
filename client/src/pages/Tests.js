@@ -15,10 +15,11 @@ import {
     SliderCartTopText, 
     SliderContainer, 
     StyledSliderButton, 
-    SliderCartTopTitle
+    SliderCartTopTitle,
+    SliderCardBottom
 } from './../components/Styles/SliderStyle';
 
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext} from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -27,7 +28,7 @@ import Logo from './../assets/logo.png';
 import {AccountContext} from  '../auth/AccountContext';
 import { FetchLogout } from '../auth/Handlers/LogoutHandler';
 
-const TestsNormal = () => {
+const Tests = () => {
     const {setUser} = useContext(AccountContext)
 
     const Logout = async () => {
@@ -36,25 +37,31 @@ const TestsNormal = () => {
             await setUser({loggedIn: false});           
         }
     }
-    
+   
     const modes = [
             {
                 id: 1,
                 title: "angol-magyar",
                 text: "Írd be az angol szó/kifejezés magyar megfelelőjét.",
-                link: "/tests1",
+                link: "/tests1"
             },
             {
                 id: 2,
                 title: "magyar-angol",
                 text: "Írd be az magyar szó/kifejezés angol megfelelőjét.",
-                link: "/tests2",
+                link: "/tests2"
             },
             {
                 id: 3,
                 title: "memória kártya",
                 text: "Találd meg az angol szó/kifejezés magyar párját.",
-                link: "/cards",
+                link: "/cards"
+            },
+            {
+                id: 4,
+                title: "egyszerűbb kártya",
+                text: "Könnyebb memória kártya, angolok fent, magyarok lent.",
+                link: "/cards2"
             }
         ];
     
@@ -110,4 +117,4 @@ const TestsNormal = () => {
     );
 }
 
-export default TestsNormal;
+export default Tests;

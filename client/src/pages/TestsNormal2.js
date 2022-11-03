@@ -22,7 +22,7 @@ import React, { useContext, useEffect, useState} from 'react';
 
 import {AccountContext} from  '../auth/AccountContext';
 
-const TestsNormal1 = () => {
+const TestsNormal2 = () => {
     const {setUser} = useContext(AccountContext)
     const [answer0, setAnswer0] = useState('');
     const [answer1, setAnswer1] = useState('');
@@ -250,4 +250,4 @@ const TestsNormal1 = () => {
     );
 }
 
-export default TestsNormal1;
+export default TestsNormal2;
