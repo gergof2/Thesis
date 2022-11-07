@@ -6,20 +6,12 @@ const session = require('express-session');
 const sql = require('../config/db');
 const { json } = require('express');
 
-router.post('/getwords', async (req, res) => {
+router.get('/getwords', async (req, res) => {
     if(req.session.user && req.session.user.email){
-        let results = [];
-        function get_Words(callback){
-            sql.query("SELECT english, hungarian FROM words ORDER BY RAND() LIMIT 10",function(err, results){
-                if(err) throw err;                
-                return callback(results);
-            })
-        }
-
-        get_Words(async function(result){
-            return res.json(result);
+        sql.query("SELECT english, hungarian FROM words ORDER BY RAND() LIMIT 10",function(err, results){
+            if(err) throw err;                
+            return res.json(results);
         })
-
     }
     else return res.json({message: "Ismeretlen felhasználó!"});
 });

@@ -21,7 +21,7 @@ function Cards(){
 
     useEffect(() => {
         fetch("http://localhost:5000/words/getwords", {
-            method: "POST",
+            method: "GET",
             credentials:"include",
             headers: {
                 "Content-Type": "application/json",

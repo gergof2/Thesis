@@ -91,7 +91,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `dateOfBirth`, `score`, 
 DROP TABLE IF EXISTS `words`;
 CREATE TABLE IF NOT EXISTS `words` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `english` char(100) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
+  `english` varchar(100) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
   `hungarian` varchar(100) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)

@@ -140,19 +140,12 @@ router.post('/logout', async (req, res) =>{
     else return res.json({message: "Ismeretlen felhasználó!"});
 });
 
-router.post('/profile',async (req, res) => {
+router.get('/profile',async (req, res) => {
     if (req.session.user && req.session.user.email){
         let data = [];
-        function get_Profile(callback){
-            sql.query("SELECT id, name, email, score, dateOfBirth, createDate FROM users WHERE email = ?", [req.session.user.email], function(err, results){
-                if(err) throw err;
-                data = results[0];
-                return callback(results[0]);
-            })
-        }
-
-        get_Profile(async function(result){
-            data = result;
+        sql.query("SELECT id, name, email, score, dateOfBirth, createDate FROM users WHERE email = ?", [req.session.user.email], function(err, results){
+            if(err) throw err;
+            data = results[0];
             return res.json({id: data.id, name: data.name, email: data.email, score: data.score, dateOfBirth: data.dateOfBirth, createDate: data.createDate});
         })
     }
@@ -194,19 +187,13 @@ router.get('/scoreboard', async (req, res) => {
     });
 });
 
-router.post('/gettests', async (req, res) => {
+router.get('/gettests', async (req, res) => {
     if(req.session.user && req.session.user.email){ 
         let data = [];
         let record = [req.session.user.id];
-        function get_tests(callback){
-            sql.query("SELECT * FROM tests WHERE user_id = ? ORDER BY date DESC", [record], function(err, results){
-                if(err) return err;
-                data = results;
-                return callback(results);
-            })
-        }
-        get_tests(async function(result){
-            data = result;
+        sql.query("SELECT * FROM tests WHERE user_id = ? ORDER BY date DESC", [record], function(err, results){
+            if(err) return err;
+            data = results;
             return res.json(data);
         })
     }

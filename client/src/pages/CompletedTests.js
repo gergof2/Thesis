@@ -25,7 +25,7 @@ const CompletedTests = () => {
     
     useEffect(() => {
         fetch("http://localhost:5000/user/gettests", {
-            method: "POST",
+            method: "GET",
             credentials:"include",
             headers: {
                 "Content-Type": "application/json",
